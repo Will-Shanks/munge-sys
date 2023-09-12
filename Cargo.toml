@@ -8,6 +8,8 @@ description = "Raw FFI bindings for munge https://github.com/dun/munge"
 keywords = ["ffi", "hpc", "bindings", "security"]
 
 [build-dependencies]
-bindgen = "0.66"
+bindgen = { version = "0.66", optional = true }
 
-[dependencies]
+[features]
+default = []
+static = []
