@@ -3,12 +3,13 @@ use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    let munge_path = env::var("MUNGE_PATH").unwrap_or("/usr/lib".to_string());
-    println!("cargo:rustc-link-search=native={munge_path}");
-
     println!("cargo:rustc-link-lib=munge");
     #[cfg(feature="static")]
     println!("cargo:rustc-link-search=static=munge");
+
+    let munge_path = env::var("MUNGE_PATH").unwrap_or("/usr/lib".to_string());
+    println!("cargo:rustc-link-search=native={}", munge_path);
+
 
     // Tell cargo to invalidate the built crate whenever the wrapper changes
     println!("cargo:rerun-if-changed=wrapper.h");
